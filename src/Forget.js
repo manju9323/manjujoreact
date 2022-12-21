@@ -23,7 +23,7 @@ function Forget(props) {
     await axios.post("http://localhost:8000/forget-pass",value)
     
       .then(res=>{
-        toast.success("link for reset password will send to your email",{
+        toast.success(res.data,{
           position:toast.POSITION.TOP_CENTER
         })
         props.history.replace("/")

@@ -1,8 +1,9 @@
 import './App.css';
 import {BrowserRouter as Router,Route} from 'react-router-dom'
 import Urlshort from './compo/Urlsho';
-import Login from './Login'
-
+import Login from './Login';
+import Result from './compo/result';
+import Edit from './compo/Edit';
 import React from 'react';
 import Register from './Register';
 import  Forget from './Forget';
@@ -28,9 +29,10 @@ function App() {
             <Route exact path="/" component={Login} />
             <Route exact path="/forget" component={Forget}/>
             <Route exact path="/reset-pass/:id/:token" component={Htmlreq}/>
-
             <Route  exact path="/register" component ={Register}/>
             <Protectedrouter exact path="/home" component={Urlshort}/>
+            <Protectedrouter exact path="/result" component={Result}/>
+            <Protectedrouter exact path="/edit" component={Edit}/>
            <ToastContainer />  
         
         </Router>

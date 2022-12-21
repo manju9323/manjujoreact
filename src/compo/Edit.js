@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import {React,useEffect, useState} from 'react'
 import {Link} from "react-router-dom"
@@ -7,7 +6,7 @@ import "../all.css"
 
 
 
-function Urlshort(props) {
+function Edit(props) {
  
 
   const [data,setdata]=useState({})
@@ -17,6 +16,7 @@ function Urlshort(props) {
     await axios.get("http://localhost:8000/api/auth/find",{headers:{"mm":`${JSON.parse(localStorage.getItem("mm"))}`}})
       .then(res=>{
         setdata(res.data)
+        setupdata(res.data)
       })
     .catch(err=>{toast.error(err.response.data.err)}
     )
@@ -46,13 +46,11 @@ function Urlshort(props) {
       })
       console.log(res.data)
       Fast()
+      props.history.push("/result")
     })
   .catch(err=>{toast.error(err.response.data.err)}
   )
    }
-
-
-
   
 
   return (
@@ -69,17 +67,14 @@ function Urlshort(props) {
     <div className='body'>
       <form >
         
-    <div><label className='left'>Age:</label> <input className='right' type="number" name= "age" onChange={handelChange} /></div>
-    <div><label className='left'>Gender:</label> <input className='right'  name= "gender" onChange={handelChange}/></div>
-    <div><label className='left'>Dob:</label> <input className='right' type="date"  name= "dob" onChange={handelChange}/></div>
-    <div> <label className='left'>Mobile number:</label> <input  className='right' type="tel" name= "mobile" onChange={handelChange}/></div>
-    <div> <label className='left'>About:</label> <textarea className='right rr'  name="about" onChange={handelChange} /></div>
+    <div><label className='left'>Age:</label> <input className='right' type="number" name= "age" value={updata.age} onChange={handelChange} /></div>
+    <div><label className='left'>Gender:</label> <input className='right'  name= "gender" value={updata.gender}  onChange={handelChange}/></div>
+    <div><label className='left'>Dob:</label> <input className='right' type="date"  name= "dob" value={updata.dob} onChange={handelChange}/></div>
+    <div> <label className='left'>Mobile number:</label> <input  className='right' type="tel" name= "mobile" value={updata.mobile} onChange={handelChange}/></div>
+    <div> <label className='left'>About:</label> <textarea className='right rr'  name="about" value={updata.about} onChange={handelChange} /></div>
      </form>
      
     </div><input className='ss' type="submit" onClick={go}/>
-     <Link to="/result" className="sss">status</Link>
-    
-      
         </div></div>
 {/*********************************************************************************************** */}
 
@@ -89,4 +84,4 @@ function Urlshort(props) {
   )
 }
 
-export default Urlshort
+export default Edit

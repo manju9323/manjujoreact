@@ -7,17 +7,17 @@ import {toast} from 'react-toastify';
 import "./all.css";
 import Button from 'react-bootstrap/Button';
 
+
+
+
+
 function Htmlreq(props) {
   const{match}=props
   const [data,setdata]=useState("")
   const search=new URLSearchParams(match.params);
  
 
-  const Fast=async(props)=>{
-    const{match}=props
-  const search=new URLSearchParams(match.params);
-  
-
+  const Fast=async()=>{
   await axios.get(`http://localhost:8000/reset-pass/${search.get("id")}/${search.get("token")}`)
     .then(res=>{
       setdata(res.data.email)
@@ -37,14 +37,17 @@ useEffect(()=>{Fast()},[])
       password1:"",
     },
     validationSchema:yup.object({
-      password:yup.number('enter number format').required('* Required').min(1,"not less than 1").max(9999999999,"not greater than 100000"),
-      password1:yup.number('enter number format').required('* Required').min(1,"not less than 1").max(9999999999,"not greater than 100000"),
+      password:yup.string("enter password").required('* Required').min(5, 'Too Short!')
+      .max(20, 'Too Long!'),
+      password1:yup.string("enter password").required('* Required').min(5, 'Too Short!')
+      .max(20, 'Too Long!'),
     }),
     
     
     
     onSubmit:async(value)=>{   
       console.log(value)
+      if(value.password === value.password1){
       await axios.post(`http://localhost:8000/reset-pass/${search.get("id")}/${search.get("token")}`,value)
       
         .then(res=>{
@@ -55,7 +58,9 @@ useEffect(()=>{Fast()},[])
         })
       .catch(err=>{toast.error(err.res.data)}
       )
-    } 
+    }
+    else{ alert("password and confirm password are mismatch",JSON.stringify({password:value.password,confirmpassword:value.password1}));}
+  }
     
     })
   

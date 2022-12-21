@@ -19,18 +19,24 @@ function Register(props) {
     name:'',
     email:'',
     password:'',
+    confirmpassword:'',
   },
+
   validationSchema:yup.object({
     name:yup.string().required('* Required'),
     
    email:yup.string().required('* Required'),
    
-   password:yup.number('Enter Number Format').required('* Required').min(1,"not less than 1").max(9999999999,"not greater than 10 digits")
+   password:yup.string("enter password").required('* Required').min(2, 'Too Short!')
+   .max(20, 'Too Long!'),
+   confirmpassword:yup.string("enter password").required('* Required').min(2, 'Too Short!')
+   .max(20, 'Too Long!')
   }),
   
   
   onSubmit:async(value)=>{
-    console.log(value)
+   
+    if(value.password === value.confirmpassword){
   await axios.post("http://localhost:8000/api/auth/register",value)
   
   .then(res=>{
@@ -43,6 +49,10 @@ function Register(props) {
   )
   
   }
+  else{ alert("password and confirm password are mismatch",JSON.stringify({password:value.password,confirmpassword:value.confirmpassword}));}
+ 
+}
+
   
   })
   return (
@@ -99,6 +109,23 @@ function Register(props) {
         value={formik.values.password} 
         /></div> 
       {formik.touched.password && formik.errors.password ? <div style={{color:"red"}}>{formik.errors.password}</div>:null}
+    </div>
+       </form>
+
+<form onSubmit={formik.handleSubmit}>
+    <div className='form-group'>
+      <label for="confirmpassword">CONFIRM PASSWORD</label>
+     <div>
+       <input id="confirmpassword" 
+        name="confirmpassword" 
+        type="password" 
+        className="form-control"  
+        placeholder="Enter password" 
+        onBlur={formik.handleBlur} 
+        onChange={formik.handleChange} 
+        value={formik.values.confirmpassword} 
+        /></div> 
+      {formik.touched.confirmpassword && formik.errors.confirmpassword ? <div style={{color:"red"}}>{formik.errors.confirmpassword}</div>:null}
     </div>
    
     <div className="form-group">
