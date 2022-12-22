@@ -27,9 +27,9 @@ function Register(props) {
     
    email:yup.string().required('* Required'),
    
-   password:yup.string("enter password").required('* Required').min(2, 'Too Short!')
+   password:yup.string("enter password").required('* Required').min(4, 'Too Short!')
    .max(20, 'Too Long!'),
-   confirmpassword:yup.string("enter password").required('* Required').min(2, 'Too Short!')
+   confirmpassword:yup.string("enter password").required('* Required').min(4, 'Too Short!')
    .max(20, 'Too Long!')
   }),
   

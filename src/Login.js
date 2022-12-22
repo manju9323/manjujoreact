@@ -21,7 +21,7 @@ function Login(props) {
   },
   validationSchema:yup.object({
     email:yup.string().required('* Required'),
-    password:yup.number('enter number format').required('* Required').min(1,"not less than 1").max(9999999999,"not greater than 100000"),
+    password:yup.string("enter password").required('* Required')
 
   }),
   

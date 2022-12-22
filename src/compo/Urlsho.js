@@ -32,23 +32,35 @@ function Urlshort(props) {
 
 
    const handelChange=(e)=>{
-    setupdata((prev)=>{
-      return {...prev,[e.target.name]:e.target.value}
-    })
+     console.log(e.target.name,e.target.value)
+      setupdata((prev)=>{
+        return {...prev,[e.target.name]:e.target.value}
+      })
+   
    }
 
    const go=async(e)=>{
     e.preventDefault();
+     // console.log(updata.age)
+     if(updata.age !==undefined && updata.gender !== undefined && updata.dob !==undefined && updata.mobile !==undefined && updata.about !==undefined )
+     {
     await axios.put("https://manjujoreact.onrender.com/api/auth/update",updata,{headers:{"mm":`${JSON.parse(localStorage.getItem("mm"))}`}})
     .then(res=>{
       toast.success("sucessfully registered!",{
         position:toast.POSITION.TOP_CENTER
       })
-      console.log(res.data)
-      Fast()
+     // console.log(res.data)
+      setupdata({})
+      props.history.push("/result")
+      
     })
   .catch(err=>{toast.error(err.response.data.err)}
   )
+    }
+  else{
+    toast.error("must fill all fields")
+  }
+
    }
 
 
@@ -70,7 +82,17 @@ function Urlshort(props) {
       <form >
         
     <div><label className='left'>Age:</label> <input className='right' type="number" name= "age" onChange={handelChange} /></div>
-    <div><label className='left'>Gender:</label> <input className='right'  name= "gender" onChange={handelChange}/></div>
+
+    <div>
+    <label for="cars" className='left'>Gender:</label>
+        <select id="cars"  className='right' name="gender" onChange={handelChange}>
+        <option value="SELECT">select</option>
+        <option value="MALE">MALE</option>
+        <option value="FEMALE">FEMALE</option>
+        <option value="OTHERS">OTHERS</option>
+       </select>   
+    </div>
+
     <div><label className='left'>Dob:</label> <input className='right' type="date"  name= "dob" onChange={handelChange}/></div>
     <div> <label className='left'>Mobile number:</label> <input  className='right' type="tel" name= "mobile" onChange={handelChange}/></div>
     <div> <label className='left'>About:</label> <textarea className='right rr'  name="about" onChange={handelChange} /></div>

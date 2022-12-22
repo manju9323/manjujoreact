@@ -37,9 +37,9 @@ useEffect(()=>{Fast()},[])
       password1:"",
     },
     validationSchema:yup.object({
-      password:yup.string("enter password").required('* Required').min(5, 'Too Short!')
+      password:yup.string("enter password").required('* Required').min(4, 'Too Short!')
       .max(20, 'Too Long!'),
-      password1:yup.string("enter password").required('* Required').min(5, 'Too Short!')
+      password1:yup.string("enter password").required('* Required').min(4, 'Too Short!')
       .max(20, 'Too Long!'),
     }),
     
