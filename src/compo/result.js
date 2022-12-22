@@ -9,7 +9,7 @@ function Result(props) {
   const [data,setdata]=useState({})
 
   const Fast=async()=>{
-    await axios.get("http://localhost:8000/api/auth/find",{headers:{"mm":`${JSON.parse(localStorage.getItem("mm"))}`}})
+    await axios.get("https://manjujoreact.onrender.com/api/auth/find",{headers:{"mm":`${JSON.parse(localStorage.getItem("mm"))}`}})
       .then(res=>{
         setdata(res.data)
       })

@@ -18,7 +18,7 @@ function Htmlreq(props) {
  
 
   const Fast=async()=>{
-  await axios.get(`http://localhost:8000/reset-pass/${search.get("id")}/${search.get("token")}`)
+  await axios.get(`https://manjujoreact.onrender.com/reset-pass/${search.get("id")}/${search.get("token")}`)
     .then(res=>{
       setdata(res.data.email)
       toast.success("Please enter the reset password",{
@@ -48,7 +48,7 @@ useEffect(()=>{Fast()},[])
     onSubmit:async(value)=>{   
       console.log(value)
       if(value.password === value.password1){
-      await axios.post(`http://localhost:8000/reset-pass/${search.get("id")}/${search.get("token")}`,value)
+      await axios.post(`https://manjujoreact.onrender.com/reset-pass/${search.get("id")}/${search.get("token")}`,value)
       
         .then(res=>{
           toast.success("sucessfully set password",{

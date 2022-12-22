@@ -37,7 +37,7 @@ function Register(props) {
   onSubmit:async(value)=>{
    
     if(value.password === value.confirmpassword){
-  await axios.post("http://localhost:8000/api/auth/register",value)
+  await axios.post("https://manjujoreact.onrender.com/api/auth/register",value)
   
   .then(res=>{
     toast.success("sucessfully registered!",{

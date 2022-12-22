@@ -20,7 +20,7 @@ function Forget(props) {
   onSubmit:async(value)=>{
     console.log(value)
   
-    await axios.post("http://localhost:8000/forget-pass",value)
+    await axios.post("https://manjujoreact.onrender.com/forget-pass",value)
     
       .then(res=>{
         toast.success(res.data,{
