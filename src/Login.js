@@ -39,7 +39,12 @@ function Login(props) {
   
     })
     
-    .catch(err=>{toast.error(err.response.data.err)}
+    .catch(
+     
+      err=>{
+        setload(false);
+        toast.error(err.response.data.err)}
+  
     )
     
   } 

@@ -85,7 +85,7 @@ function Urlshort(props) {
 
     <div>
     <label for="cars" className='left'>Gender:</label>
-        <select id="cars"  className='right' name="gender" onChange={handelChange}>
+        <select id="cars"  className='rights' name="gender" onChange={handelChange}>
         <option value="SELECT">select</option>
         <option value="MALE">MALE</option>
         <option value="FEMALE">FEMALE</option>
