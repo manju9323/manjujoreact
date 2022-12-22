@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useState } from 'react';
 //import {url} from './App'
 import {NavLink,Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Login(props) {
 
+  const [load,setload]=useState(false)
  
 
   const formik = useFormik({
@@ -28,10 +29,10 @@ function Login(props) {
   
   
   onSubmit:async(values)=>{
-  
+     setload(true);
     await axios.post("https://manjujoreact.onrender.com/api/auth/login",values)
     .then( res=>{
-     
+      setload(false);
     localStorage.setItem("mm",JSON.stringify(res.data))
 
     props.history.push("/home");
@@ -88,8 +89,9 @@ function Login(props) {
     </div>
 
     <div className="form-group passlabel">
+     
     <Button variant="primary" type="submit" >
-       LOGIN
+      {load ? "LOADING..." : "LOGIN"}
        </Button>
        <NavLink to="/register"><Button className="si" variant="primary" type="submit" >
         NEW REGISTER
